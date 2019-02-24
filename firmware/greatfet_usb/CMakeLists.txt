@@ -65,12 +65,10 @@ set(SRC_M4
     # TODO: get rid of these!
     legacy_apis/usb_api_spi.c
     legacy_apis/usb_api_adc.c
-    legacy_apis/usb_api_logic_analyzer.c
     legacy_apis/usb_api_sdir.c
     legacy_apis/usb_api_usbhost.c
     legacy_apis/usb_api_glitchkit_simple.c
     legacy_apis/usb_api_DS18B20.c
-    legacy_apis/usb_api_msp430.c
 )
 
 DeclareTargets()
