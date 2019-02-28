@@ -81,8 +81,8 @@ int main(void) {
 		if(adc_mode_enabled) {
 			adc_mode();
 		}
-		service_logic_analyzer();
 		service_heartbeat();
+		service_logic_analyzer();
 		service_glitchkit();
 	}
 

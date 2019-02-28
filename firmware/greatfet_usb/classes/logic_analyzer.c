@@ -28,7 +28,8 @@ static const sgpio_config_t sgpio_config = {
 	.clock_divider = 12,
 };
 
-static void logic_analyzer_sgpio_start() {
+static void logic_analyzer_sgpio_start()
+{
 	sgpio_configure_pin_functions(&sgpio_config);
 	sgpio_configure(&sgpio_config, SGPIO_DIRECTION_INPUT);
 
@@ -39,13 +40,17 @@ static void logic_analyzer_sgpio_start() {
 	SGPIO_SET_EN_1 = (1 << SGPIO_SLICE_A);
 }
 
-static void logic_analyzer_sgpio_stop() {
+static void logic_analyzer_sgpio_stop()
+{
 	SGPIO_CLR_EN_1 = (1 << SGPIO_SLICE_A);
 
 	nvic_disable_irq(NVIC_SGPIO_IRQ);
 }
 
-void service_logic_analyzer(void) {
+void service_logic_analyzer(void)
+{
+	if(!logic_analyzer_enabled)
+		return;
 
 	usb_endpoint_init(&usb0_endpoint_bulk_in);
 
@@ -103,5 +108,5 @@ static struct comms_verb logic_analyzer_verbs[] = {
 		.in_signature ="", .out_signature = "", .doc = "" },
 	{}
 };
-COMMS_DEFINE_SIMPLE_CLASS(logic_analyzer, CLASS_NUMBER_SELF, "logic", logic_analyzer_verbs,
+COMMS_DEFINE_SIMPLE_CLASS(logic_analyzer, CLASS_NUMBER_SELF, "logic_analyzer", logic_analyzer_verbs,
 		"Controls the logic analyzer function using the SGPIO peripheral");
